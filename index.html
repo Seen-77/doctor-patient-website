@@ -3,852 +3,448 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Sarah Mitchell | Cardiology Specialist</title>
-    <meta name="description" content="Dr. Sarah Mitchell - Leading Cardiology Specialist with over 15 years of experience in cardiovascular care and treatment.">
+    <title>Dr. Anugonda Srinivasa Chari | Healthcare Specialist</title>
+    <meta name="description" content="Dr. Anugonda Srinivasa Chari - Dedicated Healthcare Specialist providing comprehensive patient care.">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://source.unsplash.com/random/32x32/?medical" />
+    <link rel="icon" type="image/png" href="asstes/web-icon-removebg-preview.png" />
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- AOS CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    
-    <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-    
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="light-mode">
-    <!-- Preloader -->
+<body>
     <div class="preloader">
-        <div class="loader">
-            <svg viewBox="0 0 80 80">
-                <circle id="test" cx="40" cy="40" r="32"></circle>
-            </svg>
-        </div>
-        <div class="loader triangle">
-            <svg viewBox="0 0 86 80">
-                <polygon points="43 8 79 72 7 72"></polygon>
-            </svg>
-        </div>
-        <div class="loader">
-            <svg viewBox="0 0 80 80">
-                <rect x="8" y="8" width="64" height="64"></rect>
-            </svg>
-        </div>
+        <div class="spinner"></div>
     </div>
 
-    <!-- Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
-
-    <!-- Header -->
-    <header class="header">
+    <header class="header" id="header">
         <div class="container">
-            <div class="header-inner">
-                <div class="logo">
-                    <a href="#" class="logo-link">
-                        <span class="logo-text">Dr.<span class="highlight">Mitchell</span></span>
-                    </a>
-                </div>
-                <nav class="nav">
-                    <ul class="nav-list">
-                        <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
-                        <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-                        <li class="nav-item"><a href="#expertise" class="nav-link">Expertise</a></li>
-                        <li class="nav-item"><a href="#testimonials" class="nav-link">Testimonials</a></li>
-                        <li class="nav-item"><a href="#publications" class="nav-link">Publications</a></li>
-                        <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-                    </ul>
-                </nav>
-                <div class="header-actions">
-                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                        <i class="fas fa-moon"></i>
+            <nav class="navbar">
+                <a href="#hero" class="logo">Dr. Chari</a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#hero" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About Us</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+                    <li><a href="#publications" class="nav-link">Publications</a></li>
+                    <li><a href="#" class="nav-link" id="doctorLoginLink">Doctor Login</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
                         <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
                     </button>
-                    <a href="#appointment" class="btn btn-primary">Book Appointment</a>
-                    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+                    <a href="#appointment" class="btn btn-primary btn-sm">Book Appointment</a>
+                    <button class="burger-menu" id="burgerMenu" aria-label="Toggle navigation">
                         <span></span>
                         <span></span>
                         <span></span>
                     </button>
                 </div>
-            </div>
+            </nav>
         </div>
     </header>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-        <div class="mobile-menu-container">
-            <ul class="mobile-nav-list">
-                <li class="mobile-nav-item"><a href="#home" class="mobile-nav-link">Home</a></li>
-                <li class="mobile-nav-item"><a href="#about" class="mobile-nav-link">About</a></li>
-                <li class="mobile-nav-item"><a href="#expertise" class="mobile-nav-link">Expertise</a></li>
-                <li class="mobile-nav-item"><a href="#testimonials" class="mobile-nav-link">Testimonials</a></li>
-                <li class="mobile-nav-item"><a href="#publications" class="mobile-nav-link">Publications</a></li>
-                <li class="mobile-nav-item"><a href="#contact" class="mobile-nav-link">Contact</a></li>
-            </ul>
-            <div class="mobile-menu-footer">
-                <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                </div>
-                <p>© 2024 Dr. Sarah Mitchell. All rights reserved.</p>
-            </div>
-        </div>
-    </div>
-
     <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero">
+        <section class="hero" id="hero" data-section="hero">
             <div class="container">
                 <div class="hero-content">
-                    <div class="hero-text">
-                        <h1 class="hero-title split-text">Dr. Sarah Mitchell</h1>
-                        <h2 class="hero-subtitle split-text">Cardiology Specialist</h2>
-                        <p class="hero-description">Dedicated to providing exceptional cardiovascular care with over 15 years of experience in diagnosing and treating heart conditions.</p>
-                        <div class="hero-buttons">
-                            <a href="#appointment" class="btn btn-primary">Book Appointment</a>
-                            <a href="#about" class="btn btn-secondary">Learn More</a>
-                        </div>
-                        <div class="hero-stats">
-                            <div class="stat">
-                                <span class="stat-number" data-count="15">0</span>
-                                <span class="stat-label">Years Experience</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number" data-count="5000">0</span>
-                                <span class="stat-label">Patients Treated</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number" data-count="25">0</span>
-                                <span class="stat-label">Research Papers</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hero-image">
-                        <div class="image-container">
-                            <img src="https://source.unsplash.com/random/600x800/?doctor-female" alt="Dr. Sarah Mitchell" class="doctor-image">
-                            <div class="image-shape"></div>
-                        </div>
-                        <div class="floating-badge badge-1">
-                            <i class="fas fa-heart-pulse"></i>
-                            <span>Cardiology Expert</span>
-                        </div>
-                        <div class="floating-badge badge-2">
-                            <i class="fas fa-award"></i>
-                            <span>Award Winning</span>
-                        </div>
-                    </div>
+                    <p class="hero-subtitle split-text">Your Trusted Healthcare Partner</p>
+                    <h1 class="hero-title split-text">Dr. Anugonda Srinivasa Chari</h1>
+                    <p class="hero-description">
+                        Dedicated to providing comprehensive and compassionate healthcare solutions for all your needs.
+                    </p>
+                    <a href="#appointment" class="btn btn-primary btn-lg">Book An Appointment</a>
+                </div>
+                <div class="hero-image">
+                    <img src="asstes/doctor pic.png" alt="Dr. Anugonda Srinivasa Chari" class="img-fluid doctor-pic">
                 </div>
             </div>
-            <div class="hero-bg">
-                <div class="shape shape-1"></div>
-                <div class="shape shape-2"></div>
-                <div class="shape shape-3"></div>
-            </div>
-        </section>
-
-        <!-- Trusted By Section -->
-        <section class="trusted-by">
-            <div class="container">
-                <h3 class="trusted-by-title">Affiliated With</h3>
-                <div class="logos-container">
-                    <div class="logo-item" data-aos="fade-up" data-aos-delay="100">
-                        <img src="https://source.unsplash.com/random/200x100/?hospital-logo" alt="Central Hospital">
+            <div class="hero-stats">
+                <div class="container">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="15">10</span>+
+                        <p class="stat-text">Years Experience</p>
                     </div>
-                    <div class="logo-item" data-aos="fade-up" data-aos-delay="200">
-                        <img src="https://source.unsplash.com/random/200x100/?medical-logo" alt="Heart Institute">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="5000">10000</span>+
+                        <p class="stat-text">Patients Treated</p>
                     </div>
-                    <div class="logo-item" data-aos="fade-up" data-aos-delay="300">
-                        <img src="https://source.unsplash.com/random/200x100/?healthcare-logo" alt="Medical University">
-                    </div>
-                    <div class="logo-item" data-aos="fade-up" data-aos-delay="400">
-                        <img src="https://source.unsplash.com/random/200x100/?clinic-logo" alt="Research Center">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="100">1000</span>+
+                        <p class="stat-text">Research Papers</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="about">
+        <!-- Services Section -->
+        <section class="services section-padding" id="services" data-section="services">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-subtitle">About Me</span>
-                    <h2 class="section-title split-text">My Journey in Medicine</h2>
-                </div>
-                <div class="about-content">
-                    <div class="about-image" data-aos="fade-right">
-                        <div class="image-container">
-                            <img src="https://source.unsplash.com/random/600x800/?doctor-office" alt="Dr. Sarah Mitchell in her office">
-                            <div class="experience-badge">
-                                <span class="years">15+</span>
-                                <span class="text">Years of<br>Experience</span>
-                            </div>
-                        </div>
+                <h2 class="section-title text-center">Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-heartbeat service-icon"></i>
+                        <h3>General Health Check-up</h3>
+                        <p>Comprehensive health assessment including vital signs, blood work, and preventive screenings.</p>
                     </div>
-                    <div class="about-text" data-aos="fade-left">
-                        <p>I am Dr. Sarah Mitchell, a board-certified cardiologist with a passion for cardiovascular health and patient care. My journey in medicine began at Harvard Medical School, where I graduated with honors before completing my residency at Massachusetts General Hospital.</p>
-                        
-                        <p>Throughout my 15-year career, I've dedicated myself to understanding and treating complex heart conditions, with a special focus on preventive cardiology and women's heart health. My approach combines cutting-edge medical knowledge with compassionate care, ensuring each patient receives personalized treatment.</p>
-                        
+                    <div class="service-card">
+                        <i class="fas fa-stethoscope service-icon"></i>
+                        <h3>Specialized Consultations</h3>
+                        <p>Expert medical consultations for specific health concerns and chronic conditions.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-user-md service-icon"></i>
+                        <h3>Family Medicine</h3>
+                        <p>Complete healthcare services for all family members, from children to elderly care.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-pills service-icon"></i>
+                        <h3>Medication Management</h3>
+                        <p>Personalized medication plans and regular monitoring for optimal health outcomes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="trusted-by section-padding">
+            <div class="container">
+                <h2 class="section-title text-center">Trusted By Leading Healthcare Organizations</h2>
+                <div class="logos-grid">
+                    <img src="asstes/hospital logo1.png" alt="Hospital Logo 1" class="logo-item">
+                    <img src="asstes/hospital logo 2.png" alt="Hospital Logo 2" class="logo-item">
+                    <img src="asstes/hospital logo 3.png" alt="Hospital Logo 3" class="logo-item">
+                    <img src="asstes/hospital logo 4.png" alt="Hospital Logo 4" class="logo-item">
+                    <img src="asstes/hospital logo 5.png" alt="Hospital Logo 5" class="logo-item">
+                </div>
+            </div>
+        </section>
+
+        <section class="about section-padding" id="about" data-section="about">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-content">
+                        <h2 class="section-title">About Dr. Anugonda Srinivasa Chari</h2>
+                        <p class="lead-text">
+                            With over 15 years of experience, Dr. Anugonda Srinivasa Chari is a highly respected specialist dedicated to patient well-being.
+                        </p>
+                        <p>
+                            Dr. Chari is committed to delivering exceptional medical care with a focus on personalized treatment plans and advanced diagnostic techniques. My mission is to ensure every patient receives the highest standard of care in a comfortable and supportive environment.
+                        </p>
                         <div class="about-cards">
                             <div class="about-card">
-                                <div class="card-icon">
-                                    <i class="fas fa-graduation-cap"></i>
-                                </div>
-                                <div class="card-content">
-                                    <h3>Education</h3>
-                                    <ul>
-                                        <li>Harvard Medical School, MD</li>
-                                        <li>Massachusetts General Hospital, Residency</li>
-                                        <li>Johns Hopkins, Cardiology Fellowship</li>
-                                    </ul>
-                                </div>
+                                <h3>Education</h3>
+                                <p>MBBS, MD - General Medicine, DM - Cardiology</p>
                             </div>
                             <div class="about-card">
-                                <div class="card-icon">
-                                    <i class="fas fa-certificate"></i>
-                                </div>
-                                <div class="card-content">
-                                    <h3>Certifications</h3>
-                                    <ul>
-                                        <li>American Board of Internal Medicine</li>
-                                        <li>Cardiovascular Disease Certification</li>
-                                        <li>Advanced Cardiac Life Support</li>
-                                    </ul>
-                                </div>
+                                <h3>Certifications</h3>
+                                <p>Board Certified in Internal Medicine, Advanced Cardiac Life Support (ACLS)</p>
                             </div>
                         </div>
-                        
-                        <a href="#" class="btn btn-secondary">Download CV</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="asstes/main hospital logo.png" alt="About Dr. Anugonda Srinivasa Chari" class="img-fluid">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Expertise Section -->
-        <section id="expertise" class="expertise">
+        <section class="expertise section-padding" id="expertise" data-section="expertise">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-subtitle">My Expertise</span>
-                    <h2 class="section-title split-text">Specialized Services</h2>
-                </div>
+                <h2 class="section-title text-center">My Areas of Expertise</h2>
                 <div class="expertise-tabs">
-                    <div class="tabs-navigation">
-                        <button class="tab-btn active" data-tab="1">Preventive Cardiology</button>
-                        <button class="tab-btn" data-tab="2">Diagnostic Services</button>
-                        <button class="tab-btn" data-tab="3">Treatment Options</button>
-                        <button class="tab-btn" data-tab="4">Special Programs</button>
+                    <div class="tab-buttons">
+                        <button class="tab-button active" data-tab="general-medicine">General Medicine</button>
+                        <button class="tab-button" data-tab="preventive-care">Preventive Care</button>
+                        <button class="tab-button" data-tab="chronic-disease">Chronic Disease Management</button>
                     </div>
-                    <div class="tabs-content">
-                        <div class="tab-panel active" data-tab="1">
-                            <div class="panel-content">
-                                <div class="panel-image" data-aos="fade-right">
-                                    <img src="https://source.unsplash.com/random/600x400/?heart-checkup" alt="Preventive Cardiology">
-                                </div>
-                                <div class="panel-text" data-aos="fade-left">
-                                    <h3>Preventive Cardiology</h3>
-                                    <p>My preventive cardiology services focus on identifying and managing risk factors before they lead to heart disease. This includes comprehensive risk assessments, lifestyle modifications, and preventive strategies tailored to each patient's unique profile.</p>
-                                    <ul class="service-list">
-                                        <li><i class="fas fa-check-circle"></i> Comprehensive Cardiovascular Risk Assessment</li>
-                                        <li><i class="fas fa-check-circle"></i> Cholesterol Management</li>
-                                        <li><i class="fas fa-check-circle"></i> Hypertension Evaluation and Treatment</li>
-                                        <li><i class="fas fa-check-circle"></i> Lifestyle Modification Counseling</li>
-                                        <li><i class="fas fa-check-circle"></i> Family History Risk Evaluation</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-panel" data-tab="2">
-                            <div class="panel-content">
-                                <div class="panel-image" data-aos="fade-right">
-                                    <img src="https://source.unsplash.com/random/600x400/?medical-test" alt="Diagnostic Services">
-                                </div>
-                                <div class="panel-text" data-aos="fade-left">
-                                    <h3>Diagnostic Services</h3>
-                                    <p>I utilize state-of-the-art diagnostic tools and techniques to accurately assess heart function and identify cardiovascular conditions. My diagnostic approach is thorough and precise, ensuring we have a complete understanding of your heart health.</p>
-                                    <ul class="service-list">
-                                        <li><i class="fas fa-check-circle"></i> Electrocardiogram (ECG/EKG)</li>
-                                        <li><i class="fas fa-check-circle"></i> Echocardiography</li>
-                                        <li><i class="fas fa-check-circle"></i> Stress Testing</li>
-                                        <li><i class="fas fa-check-circle"></i> Holter and Event Monitoring</li>
-                                        <li><i class="fas fa-check-circle"></i> Cardiac CT and MRI Interpretation</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-panel" data-tab="3">
-                            <div class="panel-content">
-                                <div class="panel-image" data-aos="fade-right">
-                                    <img src="https://source.unsplash.com/random/600x400/?heart-treatment" alt="Treatment Options">
-                                </div>
-                                <div class="panel-text" data-aos="fade-left">
-                                    <h3>Treatment Options</h3>
-                                    <p>I offer comprehensive treatment plans for various cardiovascular conditions, combining medical management with interventional procedures when necessary. My treatment approach is evidence-based and personalized to each patient's specific needs.</p>
-                                    <ul class="service-list">
-                                        <li><i class="fas fa-check-circle"></i> Coronary Artery Disease Management</li>
-                                        <li><i class="fas fa-check-circle"></i> Heart Failure Treatment</li>
-                                        <li><i class="fas fa-check-circle"></i> Arrhythmia Management</li>
-                                        <li><i class="fas fa-check-circle"></i> Valvular Heart Disease Treatment</li>
-                                        <li><i class="fas fa-check-circle"></i> Coordination of Cardiac Interventions</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-panel" data-tab="4">
-                            <div class="panel-content">
-                                <div class="panel-image" data-aos="fade-right">
-                                    <img src="https://source.unsplash.com/random/600x400/?cardiac-rehab" alt="Special Programs">
-                                </div>
-                                <div class="panel-text" data-aos="fade-left">
-                                    <h3>Special Programs</h3>
-                                    <p>I've developed specialized programs addressing specific cardiovascular needs and populations. These programs combine medical care with education and support, creating a comprehensive approach to heart health management.</p>
-                                    <ul class="service-list">
-                                        <li><i class="fas fa-check-circle"></i> Women's Heart Health Program</li>
-                                        <li><i class="fas fa-check-circle"></i> Cardiac Rehabilitation</li>
-                                        <li><i class="fas fa-check-circle"></i> Sports Cardiology</li>
-                                        <li><i class="fas fa-check-circle"></i> Heart Disease in Pregnancy</li>
-                                        <li><i class="fas fa-check-circle"></i> Cardio-Oncology Services</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="tab-content active" id="general-medicine">
+                        <h3>Comprehensive General Medicine</h3>
+                        <p>
+                            Providing holistic primary healthcare services for individuals of all ages. From routine check-ups to managing acute illnesses, I ensure thorough diagnosis and effective treatment plans.
+                        </p>
+                        <ul>
+                            <li>Routine physical examinations</li>
+                            <li>Diagnosis and treatment of common illnesses</li>
+                            <li>Immunizations and vaccinations</li>
+                            <li>Health screenings</li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" id="preventive-care">
+                        <h3>Proactive Preventive Healthcare</h3>
+                        <p>
+                            Focusing on preventing diseases before they occur through personalized health strategies, lifestyle guidance, and regular screenings.
+                        </p>
+                        <ul>
+                            <li>Weight management programs</li>
+                            <li>Nutritional counseling</li>
+                            <li>Stress management techniques</li>
+                            <li>Early detection screenings</li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" id="chronic-disease">
+                        <h3>Effective Chronic Disease Management</h3>
+                        <p>
+                            Long-term care and management for chronic conditions such as diabetes, hypertension, and asthma, aiming to improve quality of life and prevent complications.
+                        </p>
+                        <ul>
+                            <li>Diabetes management</li>
+                            <li>Hypertension control</li>
+                            <li>Asthma and respiratory care</li>
+                            <li>Arthritis and pain management</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Why Choose Section -->
-        <section class="why-choose">
+        <section class="why-choose-me section-padding bg-light" id="whyChooseMe" data-section="whyChooseMe">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-subtitle">Why Choose Me</span>
-                    <h2 class="section-title split-text">My Approach to Care</h2>
-                </div>
+                <h2 class="section-title text-center">Why Choose Dr. Anugonda Srinivasa Chari?</h2>
                 <div class="features-grid">
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="feature-icon">
-                            <i class="fas fa-user-md"></i>
-                        </div>
-                        <h3>Personalized Care</h3>
-                        <p>I believe in treating each patient as an individual, developing customized care plans that address your specific needs and concerns.</p>
+                    <div class="feature-card">
+                        <i class="fas fa-user-md feature-icon"></i>
+                        <h3>Experienced Professional</h3>
+                        <p>Over 15 years of extensive experience in diagnosing and treating a wide range of medical conditions.</p>
                     </div>
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="feature-icon">
-                            <i class="fas fa-microscope"></i>
-                        </div>
-                        <h3>Evidence-Based Medicine</h3>
-                        <p>My practice is grounded in the latest research and clinical guidelines, ensuring you receive the most effective treatments available.</p>
+                    <div class="feature-card">
+                        <i class="fas fa-handshake feature-icon"></i>
+                        <h3>Patient-Centered Care</h3>
+                        <p>Every treatment plan is tailored to the individual needs and preferences of each patient.</p>
                     </div>
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="feature-icon">
-                            <i class="fas fa-comments"></i>
-                        </div>
-                        <h3>Clear Communication</h3>
-                        <p>I take time to explain conditions, treatments, and options in understandable terms, empowering you to make informed decisions about your health.</p>
+                    <div class="feature-card">
+                        <i class="fas fa-heartbeat feature-icon"></i>
+                        <h3>Holistic Approach</h3>
+                        <p>Focus on overall well-being, addressing both physical and mental health aspects for comprehensive recovery.</p>
                     </div>
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="feature-icon">
-                            <i class="fas fa-heartbeat"></i>
-                        </div>
-                        <h3>Preventive Focus</h3>
-                        <p>I emphasize prevention strategies that can help you maintain heart health and avoid cardiovascular disease before it develops.</p>
-                    </div>
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
-                        <div class="feature-icon">
-                            <i class="fas fa-laptop-medical"></i>
-                        </div>
-                        <h3>Advanced Technology</h3>
-                        <p>I utilize cutting-edge diagnostic tools and treatment technologies to provide the highest standard of cardiovascular care.</p>
-                    </div>
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
-                        <div class="feature-icon">
-                            <i class="fas fa-hand-holding-heart"></i>
-                        </div>
-                        <h3>Compassionate Support</h3>
-                        <p>I understand that heart conditions can be frightening, and I provide emotional support alongside medical expertise throughout your care journey.</p>
+                    <div class="feature-card">
+                        <i class="fas fa-hospital feature-icon"></i>
+                        <h3>Modern Facilities</h3>
+                        <p>Equipped with state-of-the-art technology to ensure accurate diagnostics and effective treatments.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Testimonials Section -->
-        <section id="testimonials" class="testimonials">
+        <section class="testimonials section-padding" id="testimonials" data-section="testimonials">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-subtitle">Patient Stories</span>
-                    <h2 class="section-title split-text">What My Patients Say</h2>
-                </div>
-                <div class="testimonial-slider-container">
-                    <div class="swiper testimonial-slider">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="testimonial-card">
-                                    <div class="testimonial-content">
-                                        <div class="quote-icon">
-                                            <i class="fas fa-quote-left"></i>
-                                        </div>
-                                        <p>Dr. Mitchell's expertise and compassionate approach made all the difference in my recovery from heart surgery. She took the time to explain everything clearly and was always available to answer my questions.</p>
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="testimonial-author">
-                                        <div class="author-image">
-                                            <img src="https://source.unsplash.com/random/100x100/?portrait-man" alt="Robert Johnson">
-                                        </div>
-                                        <div class="author-info">
-                                            <h4>Robert Johnson</h4>
-                                            <span>Heart Surgery Patient</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="testimonial-card">
-                                    <div class="testimonial-content">
-                                        <div class="quote-icon">
-                                            <i class="fas fa-quote-left"></i>
-                                        </div>
-                                        <p>When I was diagnosed with hypertension, I was terrified. Dr. Mitchell not only provided excellent medical care but also helped me make lifestyle changes that have significantly improved my heart health.</p>
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="testimonial-author">
-                                        <div class="author-image">
-                                            <img src="https://source.unsplash.com/random/100x100/?portrait-woman" alt="Emily Thompson">
-                                        </div>
-                                        <div class="author-info">
-                                            <h4>Emily Thompson</h4>
-                                            <span>Hypertension Patient</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="testimonial-card">
-                                    <div class="testimonial-content">
-                                        <div class="quote-icon">
-                                            <i class="fas fa-quote-left"></i>
-                                        </div>
-                                        <p>As an athlete with a family history of heart disease, I needed a cardiologist who understood my unique needs. Dr. Mitchell's sports cardiology expertise has allowed me to continue competing while ensuring my heart health.</p>
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="testimonial-author">
-                                        <div class="author-image">
-                                            <img src="https://source.unsplash.com/random/100x100/?athlete" alt="Michael Davis">
-                                        </div>
-                                        <div class="author-info">
-                                            <h4>Michael Davis</h4>
-                                            <span>Professional Athlete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="testimonial-card">
-                                    <div class="testimonial-content">
-                                        <div class="quote-icon">
-                                            <i class="fas fa-quote-left"></i>
-                                        </div>
-                                        <p>After seeing multiple doctors for my arrhythmia, Dr. Mitchell was the first to provide a clear diagnosis and effective treatment plan. Her expertise and patient-centered approach have been life-changing for me.</p>
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="testimonial-author">
-                                        <div class="author-image">
-                                            <img src="https://source.unsplash.com/random/100x100/?portrait-woman-2" alt="Sophia Martinez">
-                                        </div>
-                                        <div class="author-info">
-                                            <h4>Sophia Martinez</h4>
-                                            <span>Arrhythmia Patient</span>
-                                        </div>
-                                    </div>
-                                </div>
+                <h2 class="section-title text-center">What My Patients Say</h2>
+                <div class="swiper-container testimonial-slider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide testimonial-card">
+                            <i class="fas fa-quote-left quote-icon"></i>
+                            <p class="testimonial-text">"Dr. Chari's diagnosis for my gastric cancer was incredibly accurate and timely. The treatment plan was clearly explained, and I feel much better now. Truly a life-saver!"</p>
+                            <div class="testimonial-author">
+                                <img src="asstes/patient 1.jpg" alt="Vasu" class="author-avatar">
+                                <p class="author-name">Vasu</p>
+                                <p class="author-title">Patient with Gastric Cancer</p>
                             </div>
                         </div>
-                        <div class="swiper-pagination"></div>
+                        <div class="swiper-slide testimonial-card">
+                            <i class="fas fa-quote-left quote-icon"></i>
+                            <p class="testimonial-text">"Managing my sugar levels has always been a challenge, but Dr. Chari provided excellent guidance and a personalized plan that has made a significant difference. Highly recommend!"</p>
+                            <div class="testimonial-author">
+                                <img src="asstes/patient 2.jpg" alt="Samuel" class="author-avatar">
+                                <p class="author-name">Samuel</p>
+                                <p class="author-title">Patient with Diabetes</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide testimonial-card">
+                            <i class="fas fa-quote-left quote-icon"></i>
+                            <p class="testimonial-text">"The care and attention I received from Dr. Chari were outstanding. They took the time to listen to my concerns and provided a clear path to recovery. Very grateful to him"</p>
+                            <div class="testimonial-author">
+                                <img src="asstes/patient 3.jpg" alt="Priya Sharma" class="author-avatar">
+                                <p class="author-name">Priya Sharma</p>
+                                <p class="author-title">Recovered Patient</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </div>
-                <div class="testimonial-stats">
-                    <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
-                        <div class="stat-number" data-count="98">0</div>
-                        <div class="stat-label">Patient Satisfaction</div>
-                    </div>
-                    <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
-                        <div class="stat-number" data-count="5000">0</div>
-                        <div class="stat-label">Patients Treated</div>
-                    </div>
-                    <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
-                        <div class="stat-number" data-count="15">0</div>
-                        <div class="stat-label">Years Experience</div>
-                    </div>
-                    <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
-                        <div class="stat-number" data-count="24">0</div>
-                        <div class="stat-label">Awards Received</div>
-                    </div>
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
         </section>
 
-        <!-- Publications Section -->
-        <section id="publications" class="publications">
+        <section class="publications section-padding bg-light" id="publications" data-section="publications">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-subtitle">Research & Publications</span>
-                    <h2 class="section-title split-text">My Contributions to Medicine</h2>
-                </div>
+                <h2 class="section-title text-center">My Latest Publications & Insights</h2>
                 <div class="publications-grid">
-                    <div class="publication-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="publication-image">
-                            <img src="https://source.unsplash.com/random/400x300/?medical-journal" alt="Journal of Cardiology">
-                        </div>
-                        <div class="publication-content">
-                            <span class="publication-date">June 2023</span>
-                            <h3>Advances in Preventive Cardiology: A Comprehensive Review</h3>
-                            <p>Journal of Cardiovascular Medicine</p>
-                            <a href="#" class="publication-link">Read Publication <i class="fas fa-arrow-right"></i></a>
-                        </div>
+                    <div class="publication-card">
+                        <img src="asstes/publication 1.webp" alt="Publication Image" class="img-fluid">
+                        <h3>The Synergies of Heat Stress and Air Pollution and its Health Impacts</h3>
+                        <p class="publication-meta">July 10, 2024 | Dr. Chari</p>
+                        <p>A technical brief on the combined health impacts of heatwaves&air pollution due to climate change&priority for public health.</p>
+                        <a href="publication1_heat_air_pollution.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <div class="publication-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="publication-image">
-                            <img src="https://source.unsplash.com/random/400x300/?medical-research" alt="Heart Research">
-                        </div>
-                        <div class="publication-content">
-                            <span class="publication-date">November 2022</span>
-                            <h3>Gender Differences in Cardiovascular Disease: New Insights</h3>
-                            <p>American Heart Journal</p>
-                            <a href="#" class="publication-link">Read Publication <i class="fas fa-arrow-right"></i></a>
-                        </div>
+                    <div class="publication-card">
+                        <img src="asstes/publication 2.jpeg" alt="Publication Image" class="img-fluid">
+                        <h3>Eat Well for Heart, Gut and Overall Health</h3>
+                        <p class="publication-meta">June 25, 2024 | Dr. Chari</p>
+                        <p>Comprehensive guidance on how dietary choices profoundly influence heart, gut, and overall health, emphasizing balanced nutrition.</p>
+                        <a href="publication2_healthy_eating.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <div class="publication-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="publication-image">
-                            <img src="https://source.unsplash.com/random/400x300/?medical-book" alt="Cardiology Textbook">
-                        </div>
-                        <div class="publication-content">
-                            <span class="publication-date">March 2021</span>
-                            <h3>The Role of Inflammation in Coronary Artery Disease</h3>
-                            <p>European Journal of Cardiology</p>
-                            <a href="#" class="publication-link">Read Publication <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="publication-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="publication-image">
-                            <img src="https://source.unsplash.com/random/400x300/?medical-conference" alt="Medical Conference">
-                        </div>
-                        <div class="publication-content">
-                            <span class="publication-date">September 2020</span>
-                            <h3>Emerging Biomarkers for Early Detection of Heart Failure</h3>
-                            <p>International Cardiology Review</p>
-                            <a href="#" class="publication-link">Read Publication <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="publications-cta">
-                    <a href="#" class="btn btn-secondary">View All Publications</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Appointment Section -->
-        <section id="appointment" class="appointment">
-            <div class="container">
-                <div class="appointment-content">
-                    <div class="appointment-text" data-aos="fade-right">
-                        <div class="section-header">
-                            <span class="section-subtitle">Book an Appointment</span>
-                            <h2 class="section-title split-text">Start Your Heart Health Journey</h2>
-                        </div>
-                        <p>Schedule a consultation to discuss your cardiovascular health concerns. I'm committed to providing personalized care and developing a treatment plan tailored to your specific needs.</p>
-                        <div class="contact-info">
-                            <div class="contact-item">
-                                <i class="fas fa-phone"></i>
-                                <span>(123) 456-7890</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <span>dr.mitchell@cardiology.com</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>123 Medical Center Drive, Suite 456, Boston, MA</span>
-                            </div>
-                        </div>
-                        <div class="office-hours">
-                            <h3>Office Hours</h3>
-                            <div class="hours-grid">
-                                <div class="day">Monday - Friday</div>
-                                <div class="time">8:00 AM - 5:00 PM</div>
-                                <div class="day">Saturday</div>
-                                <div class="time">9:00 AM - 1:00 PM</div>
-                                <div class="day">Sunday</div>
-                                <div class="time">Closed</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="appointment-form" data-aos="fade-left">
-                        <form id="bookingForm">
-                            <div class="form-group">
-                                <label for="name">Full Name</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone Number</label>
-                                <input type="tel" id="phone" name="phone" required>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="date">Preferred Date</label>
-                                    <input type="date" id="date" name="date" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="time">Preferred Time</label>
-                                    <select id="time" name="time" required>
-                                        <option value="">Select Time</option>
-                                        <option value="9:00 AM">9:00 AM</option>
-                                        <option value="10:00 AM">10:00 AM</option>
-                                        <option value="11:00 AM">11:00 AM</option>
-                                        <option value="1:00 PM">1:00 PM</option>
-                                        <option value="2:00 PM">2:00 PM</option>
-                                        <option value="3:00 PM">3:00 PM</option>
-                                        <option value="4:00 PM">4:00 PM</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="reason">Reason for Visit</label>
-                                <select id="reason" name="reason" required>
-                                    <option value="">Select Reason</option>
-                                    <option value="Initial Consultation">Initial Consultation</option>
-                                    <option value="Follow-up Appointment">Follow-up Appointment</option>
-                                    <option value="Diagnostic Testing">Diagnostic Testing</option>
-                                    <option value="Second Opinion">Second Opinion</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Additional Information</label>
-                                <textarea id="message" name="message" rows="3"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Book Appointment</button>
-                        </form>
+                    <div class="publication-card">
+                        <img src="asstes/publication 3.webp" alt="Publication Image" class="img-fluid">
+                        <h3>Salmonella Outbreak Linked to Frozen Sprouted Beans</h3>
+                        <p class="publication-meta">June 1, 2024 | Dr. Chari</p>
+                        <p>An alert detailing a multistate *Salmonella* outbreak linked to recalled frozen sprouted beans, and  with crucial public health actions.</p>
+                        <a href="publication3_salmonella_outbreak.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- FAQ Section -->
-        <section class="faq">
+        <section class="faq section-padding" id="faq" data-section="faq">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-subtitle">Common Questions</span>
-                    <h2 class="section-title split-text">Frequently Asked Questions</h2>
-                </div>
-                <div class="faq-container">
-                    <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
-                        <div class="faq-question">
-                            <h3>What should I expect during my first appointment?</h3>
-                            <span class="faq-icon"><i class="fas fa-plus"></i><i class="fas fa-minus"></i></span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Your first appointment will typically include a comprehensive medical history review, physical examination, and discussion of your symptoms and concerns. We may also perform or schedule diagnostic tests as needed. I'll take time to answer your questions and develop an initial treatment plan or further evaluation strategy.</p>
+                <h2 class="section-title text-center">Frequently Asked Questions</h2>
+                <div class="faq-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            What are your consultation hours?
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>My consultation hours are Monday to Friday, 9:00 AM to 5:00 PM. Please check the appointment section for specific availability.</p>
                         </div>
                     </div>
-                    <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
-                        <div class="faq-question">
-                            <h3>How often should I have a heart check-up?</h3>
-                            <span class="faq-icon"><i class="fas fa-plus"></i><i class="fas fa-minus"></i></span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>The frequency of heart check-ups depends on your age, risk factors, and existing conditions. Generally, adults with no known heart issues should have a cardiovascular risk assessment every 4-6 years. Those with risk factors or existing heart conditions may need more frequent evaluations, ranging from every 3-12 months depending on their specific situation.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
-                        <div class="faq-question">
-                            <h3>Do you accept insurance?</h3>
-                            <span class="faq-icon"><i class="fas fa-plus"></i><i class="fas fa-minus"></i></span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Yes, I accept most major insurance plans, including Medicare and private insurance. Our office staff will verify your coverage before your appointment and can help explain any potential out-of-pocket costs. If you have questions about specific insurance plans, please contact our office directly.</p>
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            Do you accept new patients?
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Yes, I am currently accepting new patients. You can book an appointment through our website or by calling the clinic.</p>
                         </div>
                     </div>
-                    <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
-                        <div class="faq-question">
-                            <h3>What are the warning signs of heart problems I should watch for?</h3>
-                            <span class="faq-icon"><i class="fas fa-plus"></i><i class="fas fa-minus"></i></span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Important warning signs include chest pain or discomfort, shortness of breath, heart palpitations (irregular heartbeat), unusual fatigue, dizziness or lightheadedness, swelling in the legs or ankles, and fainting. Women may experience less typical symptoms such as nausea, back or jaw pain. If you experience these symptoms, especially chest pain, seek medical attention immediately.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item" data-aos="fade-up" data-aos-delay="500">
-                        <div class="faq-question">
-                            <h3>How can I prepare for my appointment?</h3>
-                            <span class="faq-icon"><i class="fas fa-plus"></i><i class="fas fa-minus"></i></span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>To prepare for your appointment, bring a list of your current medications (including over-the-counter drugs and supplements), your medical records or test results from other providers, a list of your symptoms and when they occur, and your family medical history. It's also helpful to write down any questions you have so we can address all your concerns during the visit.</p>
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            Which insurance plans do you accept?
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>We accept a wide range of insurance plans. Please contact our administrative staff with your insurance details to confirm coverage.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="contact">
+        <section class="appointment section-padding bg-light" id="appointment" data-section="appointment">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-subtitle">Get in Touch</span>
-                    <h2 class="section-title split-text">Contact Information</h2>
-                </div>
-                <div class="contact-content">
-                    <div class="contact-info-card" data-aos="fade-up">
-                        <div class="contact-methods">
-                            <div class="contact-method">
-                                <div class="method-icon">
-                                    <i class="fas fa-phone"></i>
-                                </div>
-                                <div class="method-details">
-                                    <h3>Phone</h3>
-                                    <p>(123) 456-7890</p>
-                                </div>
-                            </div>
-                            <div class="contact-method">
-                                <div class="method-icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div class="method-details">
-                                    <h3>Email</h3>
-                                    <p>dr.mitchell@cardiology.com</p>
-                                </div>
-                            </div>
-                            <div class="contact-method">
-                                <div class="method-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div class="method-details">
-                                    <h3>Office</h3>
-                                    <p>123 Medical Center Drive, Suite 456<br>Boston, MA 02115</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="social-links">
-                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        </div>
+                <h2 class="section-title text-center">Book Your Appointment</h2>
+                <form class="appointment-form" id="appointmentForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Your Full Name" required>
                     </div>
-                    <div class="contact-map" data-aos="fade-up">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2948.8442639328655!2d-71.10812312346177!3d42.33514413508395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e379f63dc43ccb%3A0xa15d5aa87d0f0c12!2s123%20Medical%20Center%20Dr%2C%20Boston%2C%20MA%2002115!5e0!3m2!1sen!2sus!4v1682456789012!5m2!1sen!2sus" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
                     </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Your Phone Number (Optional)">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Preferred Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Preferred Time</label>
+                        <input type="time" id="time" name="time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message / Reason for Visit</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Describe your symptoms or reason for visit"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Book Appointment</button>
+                    <div class="form-response" id="appointmentFormResponse"></div>
+                </form>
+            </div>
+        </section>
+
+        <section class="newsletter section-padding" id="newsletter" data-section="newsletter">
+            <div class="container">
+                <div class="newsletter-content bg-primary">
+                    <div class="newsletter-text">
+                        <h2>Stay Updated with My Latest Insights!</h2>
+                        <p>Subscribe to my newsletter for health tips, research updates, and clinic news.</p>
+                    </div>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Your Email Address" required>
+                        <button type="submit" class="btn btn-light">Subscribe Now</button>
+                    </form>
                 </div>
             </div>
         </section>
 
-        <!-- Newsletter Section -->
-        <section class="newsletter">
-            <div class="container">
-                <div class="newsletter-content">
-                    <div class="newsletter-text" data-aos="fade-right">
-                        <h2>Subscribe to My Newsletter</h2>
-                        <p>Stay updated with the latest in cardiovascular health, treatment advances, and wellness tips delivered directly to your inbox.</p>
-                    </div>
-                    <div class="newsletter-form" data-aos="fade-left">
-                        <form id="newsletterForm">
-                            <input type="email" placeholder="Your Email Address" required>
-                            <button type="submit" class="btn btn-primary">Subscribe</button>
-                        </form>
-                    </div>
-                </div>
+        <!-- Doctor Login Section -->
+         <section class="doctor-auth section-padding" id="doctorAuth" style="display:none;" data-section="doctorAuth">
+    <div class="container">
+        <h2 class="section-title text-center">Doctor Login</h2>
+        <form class="login-form" id="doctorLoginForm">
+            <div class="form-group">
+                <label for="doctorUsername">Username</label>
+                <input type="text" id="doctorUsername" required>
             </div>
-        </section>
+            <div class="form-group">
+                <label for="doctorPassword">Password</label>
+                <input type="password" id="doctorPassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+            <div class="form-response" id="doctorLoginResponse"></div>
+        </form>
+    </div>
+</section>
+
+<section class="doctor-console section-padding" id="doctorConsole" style="display:none;" data-section="doctorConsole">
+    <div class="container">
+        <h2 class="section-title text-center">Booked Appointments</h2>
+        <button class="btn btn-secondary" id="logoutBtn">Logout</button>
+        <div class="appointments-list" id="appointmentsList">
+            <p class="loading-appointments">Loading appointments...</p>
+        </div>
+    </div>
+</section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer bg-dark text-light">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">
-                    <a href="#" class="logo-link">
-                        <span class="logo-text">Dr.<span class="highlight">Mitchell</span></span>
-                    </a>
-                    <p>Dedicated to providing exceptional cardiovascular care with compassion and expertise.</p>
-                </div>
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#expertise">Expertise</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#publications">Publications</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h3>Services</h3>
-                    <ul>
-                        <li><a href="#">Preventive Cardiology</a></li>
-                        <li><a href="#">Diagnostic Services</a></li>
-                        <li><a href="#">Treatment Options</a></li>
-                        <li><a href="#">Women's Heart Health</a></li>
-                        <li><a href="#">Sports Cardiology</a></li>
-                        <li><a href="#">Cardiac Rehabilitation</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <h3>Contact</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Medical Center Drive, Suite 456, Boston, MA</p>
-                    <p><i class="fas fa-phone"></i> (123) 456-7890</p>
-                    <p><i class="fas fa-envelope"></i> dr.mitchell@cardiology.com</p>
+                <div class="footer-about">
+                    <h3>Dr. Anugonda Srinivasa Chari</h3>
+                    <p>Dedicated to providing the highest standard of compassionate medical care.</p>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                     </div>
                 </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#about">About Me</a></li>
+                        <li><a href="#expertise">Services</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#publications">Publications</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> People Health Care, Hyderabad, India</p>
+                    <p><i class="fas fa-phone-alt"></i> +91 6302490846</p>
+                    <p><i class="fas fa-envelope"></i> seen98315@gmail.com</p>
+                </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Dr. Sarah Mitchell. All rights reserved.</p>
+                <p>&copy; 2025 Dr. Anugonda Srinivasa Chari. All rights reserved.</p>
                 <ul class="footer-legal">
                     <li><a href="#">Privacy Policy</a></li>
                     <li><a href="#">Terms of Service</a></li>
@@ -858,20 +454,20 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
     <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </a>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/split-type"></script>
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <!-- Core scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     
-    <!-- Custom JavaScript -->
+    <!-- Custom scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
+
     <script src="script.js"></script>
 </body>
 </html>
