@@ -26,7 +26,11 @@ const pool = mysql.createPool({
     host: process.env.DB_HOST,      // e.g., 'localhost' or '127.0.0.1'
     user: process.env.DB_USER,      // e.g., 'root'
     password: process.env.DB_PASSWORD, // This should be empty string '' if your root has no password
-    database: process.env.DB_NAME,  // e.g., 'doctor_app'
+    database: process.env.DB_NAME,
+    port: 4000,
+     ssl: {
+        rejectUnauthorized: true
+    },// e.g., 'doctor_app'
     waitForConnections: true,       // If true, waits for connection to become available if pool is exhausted
     connectionLimit: 10,            // Maximum number of connections in the pool
     queueLimit: 0                   // Unlimited number of connection requests can be queued
