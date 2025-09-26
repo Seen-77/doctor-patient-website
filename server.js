@@ -1,8 +1,7 @@
-// server.js
+// server.js (Final Corrected Version)
 
 // --- 1. Load Environment Variables ---
-// IMPORTANT: This line MUST be at the very top to load variables from your .env file
-require('dotenv').config(); 
+require('dotenv').config();
 
 // --- 2. Core Module Imports ---
 const express = require('express');
@@ -10,182 +9,308 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 // --- 3. Database & Security Module Imports ---
-// CHANGE: Imported mysql2 for MySQL connectivity and bcryptjs for password hashing.
-const mysql = require('mysql2/promise'); // MySQL client library (uses promises for async/await)
-const bcrypt = require('bcryptjs');     // For securely hashing and comparing passwords
-// const jwt = require('jsonwebtoken'); // You'll need this when implementing JWT tokens for authentication
+const mysql = require('mysql2/promise');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // --- 4. Initialize Express App ---
 const app = express();
-const PORT = process.env.PORT || 3000; // Use port from .env or default to 3000
+const PORT = process.env.PORT || 3000;
 
 // --- 5. MySQL Connection Pool Configuration ---
-// CHANGE: Replaced direct connection with a connection pool for better performance and reliability.
-// Uses environment variables from .env for sensitive credentials.
 const pool = mysql.createPool({
-    host: process.env.DB_HOST,      // e.g., 'localhost' or '127.0.0.1'
-    user: process.env.DB_USER,      // e.g., 'root'
-    password: process.env.DB_PASSWORD, // This should be empty string '' if your root has no password
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    port: 4000,
-     ssl: {
-        rejectUnauthorized: true
-    },// e.g., 'doctor_app'
-    waitForConnections: true,       // If true, waits for connection to become available if pool is exhausted
-    connectionLimit: 10,            // Maximum number of connections in the pool
-    queueLimit: 0                   // Unlimited number of connection requests can be queued
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
 // --- 6. Test Database Connection ---
-// Attempts to get a connection from the pool to verify database access on server startup.
 pool.getConnection()
     .then(connection => {
         console.log('✅ MySQL connected successfully!');
-        connection.release(); // Release the connection back to the pool immediately
+        connection.release();
     })
     .catch(err => {
         console.error('❌ MySQL connection error:', err.message);
-        // If the database connection fails, it's critical. Exit the application.
-        process.exit(1); 
+        process.exit(1);
     });
 
 // --- 7. Middleware Setup ---
-app.use(bodyParser.json()); // To parse JSON request bodies
-app.use(cors());            // Enable CORS for all routes (allows frontend to make requests)
-// Serves static files (HTML, CSS, JS, images) from the current directory (your project root)
-app.use(express.static(__dirname)); 
-
-// REMOVED: In-memory "database" variables are removed as data is now stored in MySQL.
-// let appointments = []; 
-// let nextAppointmentId = 1;
+app.use(bodyParser.json());
+app.use(cors());
+app.use(express.static(__dirname));
 
 // --- 8. API Endpoints ---
 
-// Contact Form Endpoint
-app.post('/api/contact', async (req, res) => {
-    const { name, email, subject, message } = req.body;
+// =================================================================
+// == PATIENT AUTHENTICATION ENDPOINTS ==
+// =================================================================
 
-    // Basic validation
-    if (!name || !email || !subject || !message) {
-        return res.status(400).json({ message: 'All fields are required.' });
-    }
+app.post('/api/patients/register', async (req, res) => {
+    const { fullName, email, phone, password } = req.body;
+    if (!fullName || !password) return res.status(400).json({ message: 'Full name and password are required.' });
+    if (!email && !phone) return res.status(400).json({ message: 'Please provide either an email or a phone number.' });
 
     try {
-        // In a real app, you'd save this to a database and/or send an email
-        // For demo, we'll just return success
-        res.status(200).json({ 
-            message: 'Message sent successfully! We will get back to you soon.',
-            contact: { name, email, subject, message }
-        });
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const userEmail = email || null;
+        const userPhone = phone || null;
+        await pool.execute('INSERT INTO patients (fullName, email, phone, password) VALUES (?, ?, ?, ?)', [fullName, userEmail, userPhone, hashedPassword]);
+        res.status(201).json({ message: 'Registration Successful! You can now log in.' });
     } catch (error) {
-        console.error('Contact form error:', error);
-        res.status(500).json({ message: 'Server error while processing your message.' });
+        if (error.code === 'ER_DUP_ENTRY') {
+            const message = error.sqlMessage.includes('email') ? 'This email address is already registered.' : 'This phone number is already registered.';
+            return res.status(409).json({ message });
+        }
+        console.error('Patient registration error:', error);
+        res.status(500).json({ message: 'Server error during registration.' });
     }
 });
 
-// 1. Book Appointment
-// CHANGE: This endpoint now inserts appointment data into the 'appointments' table in MySQL.
-app.post('/api/book-appointment', async (req, res) => { // Added 'async' as we're using 'await'
-    const { fullName, email, phone, date, time, message } = req.body;
-
-    // Basic server-side validation
-    if (!fullName || !email || !date || !time) {
-        return res.status(400).json({ message: 'Full Name, Email, Date, and Time are required.' });
-    }
+app.post('/api/patients/login', async (req, res) => {
+    const { loginIdentifier, password } = req.body;
+    if (!loginIdentifier || !password) return res.status(400).json({ message: 'Login identifier and password are required.' });
 
     try {
-        // Execute an SQL INSERT statement to add a new appointment
-        const [result] = await pool.execute(
-            'INSERT INTO appointments (fullName, email, phone, date, time, message, status, createdAt) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())',
-            // Parameters for the SQL query. 'NOW()' is a MySQL function for current timestamp.
-            [fullName, email, phone || '', date, time, message || '', 'Pending'] 
-        );
+        const [rows] = await pool.execute('SELECT * FROM patients WHERE email = ? OR phone = ?', [loginIdentifier, loginIdentifier]);
+        if (rows.length === 0) return res.status(401).json({ message: 'Invalid credentials.' });
 
-        // Construct the new appointment object to send back in the response,
-        // including the ID generated by MySQL (result.insertId).
-        const newAppointment = {
-            id: result.insertId, 
-            fullName,
-            email,
-            phone: phone || '',
-            date,
-            time,
-            message: message || '',
-            status: 'Pending',
-            createdAt: new Date().toISOString() // Provide a consistent createdAt for response
-        };
+        const patient = rows[0];
+        const isMatch = await bcrypt.compare(password, patient.password);
+        if (!isMatch) return res.status(401).json({ message: 'Invalid credentials.' });
 
-        console.log('✅ New appointment booked:', newAppointment);
-        // Respond with 201 Created status for successful resource creation
-        res.status(201).json({
-            message: 'Appointment booked successfully!',
-            appointment: newAppointment
-        });
+        const token = jwt.sign({ id: patient.id, email: patient.email, phone: patient.phone }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.status(200).json({ message: 'Login successful!', token: token });
     } catch (error) {
-        console.error('❌ Appointment booking error:', error);
-        res.status(500).json({ message: 'Server error during appointment booking.' });
-    }
-});
-
-// 2. Doctor Login
-// CHANGE: This endpoint now authenticates doctors against the 'users' table in MySQL,
-// comparing the provided password with the stored hashed password using bcrypt.
-app.post('/api/doctor-login', async (req, res) => { // Added 'async'
-    const { username, password } = req.body;
-
-    // Basic input validation
-    if (!username || !password) {
-        return res.status(400).json({ message: 'Username and password are required.' });
-    }
-
-    try {
-        // Query the 'users' table to find the user by username
-        // The [rows] syntax is for array destructuring, as pool.execute returns [rows, fields]
-        const [rows] = await pool.execute('SELECT * FROM users WHERE username = ?', [username]);
-
-        // If no user with that username is found
-        if (rows.length === 0) {
-            return res.status(401).json({ message: 'Invalid username or password.' });
-        }
-
-        const user = rows[0]; // Get the first (and only) user found
-
-        // Compare the provided plain-text password with the hashed password from the database
-        const isMatch = await bcrypt.compare(password, user.password);
-
-        // If passwords don't match
-        if (!isMatch) {
-            return res.status(401).json({ message: 'Invalid username or password.' });
-        }
-
-        // Authentication successful!
-        // TODO: In a real application, you would generate a JWT (JSON Web Token) here
-        // and send it back to the client for secure session management.
-        // For this demo, we send a mock token.
-        res.status(200).json({ message: 'Login successful!', token: 'mock-jwt-token-replace-with-real-jwt' });
-
-    } catch (error) {
-        console.error('❌ Doctor login error:', error);
+        console.error('Patient login error:', error);
         res.status(500).json({ message: 'Server error during login.' });
     }
 });
 
-// 3. Get All Appointments (for doctor console)
-// CHANGE: This endpoint now fetches all appointments directly from the MySQL 'appointments' table.
-app.get('/api/appointments', async (req, res) => { // Added 'async'
-    // TODO: In a real app, you would add JWT authentication here
-    // to ensure only logged-in doctors can access this data.
+// =================================================================
+// == PATIENT-PROTECTED ENDPOINTS ==
+// =================================================================
+const protectPatientRoute = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) return res.status(401).json({ message: 'Not authorized, no token' });
+    const token = authHeader.split(' ')[1];
     try {
-        // Execute an SQL SELECT statement to retrieve all appointments, ordered by creation time
-        const [rows] = await pool.execute('SELECT * FROM appointments ORDER BY createdAt DESC');
-        res.status(200).json(rows); // Send the retrieved rows (appointments) as JSON
+        req.patient = jwt.verify(token, process.env.JWT_SECRET);
+        next();
     } catch (error) {
-        console.error('❌ Error fetching appointments:', error);
+        res.status(401).json({ message: 'Not authorized, token failed' });
+    }
+};
+
+app.post('/api/book-appointment', protectPatientRoute, async (req, res) => {
+    const { date, time, message } = req.body;
+    const patientId = req.patient.id;
+    if (!date || !time) return res.status(400).json({ message: 'Date and Time are required.' });
+
+    try {
+        const [patientRows] = await pool.execute('SELECT fullName, email, phone FROM patients WHERE id = ?', [patientId]);
+        if (patientRows.length === 0) return res.status(404).json({ message: 'Patient not found.' });
+
+        const { fullName, email, phone } = patientRows[0];
+        await pool.execute('INSERT INTO appointments (patient_id, fullName, email, phone, date, time, message, status, createdAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())', [patientId, fullName, email, phone || '', date, time, message || '', 'Pending']);
+        res.status(201).json({ message: 'Appointment booked successfully!' });
+    } catch (error) {
+        console.error('Appointment booking error:', error);
+        res.status(500).json({ message: 'Server error during appointment booking.' });
+    }
+});
+
+app.get('/api/patients/my-appointments', protectPatientRoute, async (req, res) => {
+    const patientId = req.patient.id;
+    try {
+        const [rows] = await pool.execute(
+            'SELECT id, date, time, status, doctor_notes, medical_description FROM appointments WHERE patient_id = ? ORDER BY date DESC',
+            [patientId]
+        );
+        res.status(200).json(rows);
+    } catch (error) {
+        console.error('Error fetching patient appointments:', error);
         res.status(500).json({ message: 'Server error fetching appointments.' });
+    }
+});
+
+// =================================================================
+// == DOCTOR / ADMIN ENDPOINTS ==
+// =================================================================
+
+app.post('/api/doctor-login', async (req, res) => {
+    const { username, password } = req.body;
+    if (!username || !password) return res.status(400).json({ message: 'Username and password are required.' });
+    
+    try {
+        const [rows] = await pool.execute('SELECT * FROM users WHERE username = ?', [username]);
+        if (rows.length === 0) return res.status(401).json({ message: 'Invalid username or password.' });
+
+        const user = rows[0];
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) return res.status(401).json({ message: 'Invalid username or password.' });
+        
+        res.status(200).json({ message: 'Login successful!', token: 'mock-admin-jwt-token' });
+    } catch (error) {
+        console.error('Doctor login error:', error);
+        res.status(500).json({ message: 'Server error during login.' });
+    }
+});
+
+app.get('/api/admin/appointments', async (req, res) => {
+    try {
+        const [rows] = await pool.execute('SELECT * FROM appointments ORDER BY createdAt DESC');
+        res.status(200).json(rows);
+    } catch (error) {
+        console.error('Error fetching appointments:', error);
+        res.status(500).json({ message: 'Server error fetching appointments.' });
+    }
+});
+
+app.get('/api/admin/patients', async (req, res) => {
+    try {
+        const [rows] = await pool.execute('SELECT id, fullName, email, createdAt FROM patients ORDER BY createdAt DESC');
+        res.status(200).json(rows);
+    } catch (error) {
+        console.error('Error fetching patients:', error);
+        res.status(500).json({ message: 'Server error fetching patients.' });
+    }
+});
+
+app.get('/api/admin/analytics', async (req, res) => {
+    try {
+        const [pendingResult] = await pool.execute("SELECT COUNT(id) as pendingCount FROM appointments WHERE status = 'Pending'");
+        const pendingCount = pendingResult[0].pendingCount;
+
+        const today = new Date().toISOString().slice(0, 10);
+        const [todayResult] = await pool.execute("SELECT COUNT(id) as todayCount FROM appointments WHERE date = ?", [today]);
+        const todayCount = todayResult[0].todayCount;
+
+        const [patientsResult] = await pool.execute("SELECT COUNT(id) as totalPatients FROM patients");
+        const totalPatients = patientsResult[0].totalPatients;
+
+        const [chartData] = await pool.execute(`
+            SELECT DATE(date) as appointmentDate, COUNT(id) as count 
+            FROM appointments 
+            WHERE date >= CURDATE() - INTERVAL 6 DAY AND date <= CURDATE()
+            GROUP BY DATE(date) 
+            ORDER BY appointmentDate ASC;
+        `);
+
+        res.status(200).json({
+            pendingCount,
+            todayCount,
+            totalPatients,
+            chartData
+        });
+    } catch (error) {
+        console.error('Error fetching analytics:', error);
+        res.status(500).json({ message: 'Server error while fetching analytics.' });
+    }
+});
+
+// Endpoint to create a new bill for an appointment
+app.post('/api/admin/billing', async (req, res) => {
+    const { appointment_id, amount, notes } = req.body;
+    if (!appointment_id || !amount) {
+        return res.status(400).json({ message: 'Appointment ID and amount are required.' });
+    }
+    try {
+        await pool.execute(
+            'INSERT INTO billing (appointment_id, amount, notes) VALUES (?, ?, ?)',
+            [appointment_id, amount, notes || null]
+        );
+        res.status(201).json({ message: 'Billing record created successfully.' });
+    } catch (error) {
+        if (error.code === 'ER_DUP_ENTRY') {
+            return res.status(409).json({ message: 'A bill for this appointment already exists.' });
+        }
+        console.error('Error creating billing record:', error);
+        res.status(500).json({ message: 'Server error while creating billing record.' });
+    }
+});
+
+// Endpoint to get all billing records
+app.get('/api/admin/billing', async (req, res) => {
+    try {
+        const [rows] = await pool.execute(`
+            SELECT b.*, a.fullName, a.date 
+            FROM billing b
+            JOIN appointments a ON b.appointment_id = a.id
+            ORDER BY b.created_at DESC
+        `);
+        res.status(200).json(rows);
+    } catch (error) {
+        console.error('Error fetching billing records:', error);
+        res.status(500).json({ message: 'Server error while fetching billing records.' });
+    }
+});
+
+// Endpoint to update a bill's status (e.g., mark as 'Paid')
+app.patch('/api/admin/billing/:id', async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    if (!status) {
+        return res.status(400).json({ message: 'Status is required.' });
+    }
+    try {
+        const [result] = await pool.execute('UPDATE billing SET status = ? WHERE id = ?', [status, id]);
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Billing record not found.' });
+        }
+        res.status(200).json({ message: 'Billing status updated.' });
+    } catch (error) {
+        console.error('Error updating billing status:', error);
+        res.status(500).json({ message: 'Server error while updating billing status.' });
+    }
+});
+
+// THIS IS THE SINGLE, CORRECTLY PLACED ENDPOINT FOR UPDATING APPOINTMENTS
+app.patch('/api/admin/appointments/:id', async (req, res) => {
+    const { id } = req.params;
+    const { status, doctor_notes, medical_description } = req.body;
+    let fieldsToUpdate = [];
+    let queryParams = [];
+
+    if (status) {
+        fieldsToUpdate.push('status = ?');
+        queryParams.push(status);
+    }
+    if (doctor_notes !== undefined) {
+        fieldsToUpdate.push('doctor_notes = ?');
+        queryParams.push(doctor_notes || null);
+    }
+    if (medical_description !== undefined) {
+        fieldsToUpdate.push('medical_description = ?');
+        queryParams.push(medical_description || null);
+    }
+
+    if (fieldsToUpdate.length === 0) {
+        return res.status(400).json({ message: 'No fields to update.' });
+    }
+
+    queryParams.push(id);
+
+    try {
+        const [result] = await pool.execute(
+            `UPDATE appointments SET ${fieldsToUpdate.join(', ')} WHERE id = ?`,
+            queryParams
+        );
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Appointment not found.' });
+        }
+        res.status(200).json({ message: `Appointment ${id} updated successfully.` });
+    } catch (error) {
+        console.error('Error updating appointment:', error);
+        res.status(500).json({ message: 'Server error while updating appointment.' });
     }
 });
 
 // --- 9. Start the Server ---
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
 });

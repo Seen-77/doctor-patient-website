@@ -56,10 +56,7 @@ section {
     display: block;
 }
 
-/* Doctor login sections hidden by default */
-#doctorAuth, #doctorConsole {
-    display: none;
-}
+
 
 /* ===== BASE STYLES ===== */
 * {
@@ -520,7 +517,7 @@ h3 {
     background-color: var(--primary-dark);
     color: #fff;
     padding: 30px 0;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     position: relative;
     z-index: 1;
 }
@@ -792,6 +789,14 @@ h3 {
     justify-content: center;
     min-height: 350px;
 }
+.swiper-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition-property: transform;
+    display: block;
+}
 
 .quote-icon {
     font-size: 3rem;
@@ -842,6 +847,8 @@ h3 {
 .swiper-pagination-bullet-active {
     background-color: var(--primary-color);
 }
+
+
 
 
 /* ===== PUBLICATIONS SECTION ===== */
@@ -905,6 +912,76 @@ h3 {
 
 .read-more .fa-arrow-right {
     margin-left: 8px;
+}
+/* Modal styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 30px;
+  border: 1px solid #888;
+  width: 90%;
+  max-width: 450px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.close-btn {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Form switcher link */
+.form-switcher {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Response message styles */
+.form-response {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    display: none;
+}
+.form-response.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+.form-response.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Nav bar styles */
+.nav-link-divider {
+    color: var(--text-color-light);
+    margin: 0 5px;
 }
 /* Doctor Auth & Console Sections */
 .doctor-auth, .doctor-console {
@@ -1110,6 +1187,43 @@ h3 {
     color: #fff;
     display: block;
 }
+
+
+
+.appointments-display-area {
+    margin-top: 20px;
+}
+
+.patient-appointment-item {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: var(--bg-light);
+}
+
+.patient-appointment-item p {
+    margin: 0 0 8px 0;
+}
+
+.patient-appointment-item .notes {
+    font-style: italic;
+    color: var(--text-light);
+    border-top: 1px dashed var(--border-color);
+    padding-top: 8px;
+    margin-top: 8px;
+}
+
+.status-badge {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+}
+.status-badge.pending { background-color: #f39c12; }
+.status-badge.confirmed { background-color: #2ecc71; }
+.status-badge.cancelled { background-color: #e74c3c; }
 
 /* ===== NEWSLETTER SECTION ===== */
 .newsletter-content {
