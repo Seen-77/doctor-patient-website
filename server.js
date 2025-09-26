@@ -19,10 +19,11 @@ const PORT = process.env.PORT || 3000;
 
 // --- 5. MySQL Connection Pool Configuration ---
 const pool = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
+     host: process.env.MYSQLHOST,       // Change to MYSQLHOST
+    user: process.env.MYSQLUSER,       // Change to MYSQLUSER
+    password: process.env.MYSQLPASSWORD, // Change to MYSQLPASSWORD
+    database: process.env.MYSQLDATABASE, // Change to MYSQLDATABASE
+    port: process.env.MYSQLPORT,         // Add MYSQLPORT
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
